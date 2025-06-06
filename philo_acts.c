@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 05:33:23 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 06:58:15 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:05:59 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,32 @@
 
 void	ft_user_eat(t_users *p)
 {
+	// if (p->l_fork < p->r_fork)
+	// {
+	// 	pthread_mutex_lock(p->l_fork);
+	// 	ft_print_act("has taken a fork", p, p->id);
+	// 	if (p->rip || *p->rip == 1)
+	// 	{
+	// 		ft_usleep(p, p->infos->time_to_eat);
+	// 		pthread_mutex_unlock(p->r_fork);
+	// 		return ;
+	// 	}
+	// 	pthread_mutex_lock(p->r_fork);
+	// 	ft_print_act("has taken a fork", p, p->id);
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock(p->r_fork);
+	// 	ft_print_act("has taken a fork", p, p->id);
+	// 	if (p->infos->user_count == 1)
+	// 	{
+	// 		ft_usleep(p, p->infos->time_to_eat);
+	// 		pthread_mutex_unlock(p->r_fork);
+	// 		return ;
+	// 	}
+	// 	pthread_mutex_lock(p->l_fork);
+	// 	ft_print_act("has taken a fork", p, p->id);
+	// }
 	pthread_mutex_lock(p->r_fork);
 	ft_print_act("has taken a fork", p, p->id);
 	pthread_mutex_lock(p->l_fork);

@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 04:20:54 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 06:49:42 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:45:47 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdio.h>
 
 # define MAX_USER 200
+
+# define ERR_USAGE		1
+# define ERR_SPACES		2
+# define ERR_NOT_INT	3
+# define ERR_EMPTY		4
+# define ERR_INVALID	5
 
 typedef struct s_users
 {
@@ -39,6 +45,7 @@ typedef struct s_users
 
 typedef struct s_info
 {
+	int				error_message;
 	int				user_count;
 	size_t			time_to_die;
 	size_t			time_to_eat;
@@ -71,4 +78,7 @@ int			check_users_eat(t_users *p);
 void		ft_print_act(char *s, t_users *p, int p_id);
 void		destroy_all(t_info *infos);
 int			ft_user_dead(t_users *p);
+int			is_white_space(char c);
+void		print_error(int error_code);
+void		print_usage(void);
 #endif

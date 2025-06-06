@@ -6,11 +6,16 @@
 /*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 06:10:03 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 07:18:03 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:43:05 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	is_white_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+}
 
 static int	user_dead(t_users *p, size_t time_to_die)
 {
