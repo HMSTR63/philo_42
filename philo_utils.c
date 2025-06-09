@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:15:41 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 06:50:02 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/07 03:43:43 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ascii_to_int(const char *str)
 			return (0);
 	}
 	return (res * sign);
-}
+} 
 
 int	ft_usleep(t_users *p, size_t ms)
 {

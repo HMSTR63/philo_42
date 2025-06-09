@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:56:16 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 07:14:41 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/07 03:23:11 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,15 @@ void	setup_all(t_info *infos)
 {
 	int	h;
 
-	h = 0;
-	while (h < infos->user_count)
-	{
+	h = -1;
+	while (++h < infos->user_count)
 		pthread_mutex_init(&infos->forks[h], NULL);
-		h++;
-	}
 	infos->rip_f = 0;
 	pthread_mutex_init(&infos->print_mutex, NULL);
 	pthread_mutex_init(&infos->dead_mutex, NULL);
 	pthread_mutex_init(&infos->meal_mutex, NULL);
-	h = 0;
-	while (h < infos->user_count)
+	h = -1;
+	while (++h < infos->user_count)
 	{
 		infos->users[h].id = h + 1;
 		infos->users[h].eat = 0;
@@ -40,6 +37,5 @@ void	setup_all(t_info *infos)
 		infos->users[h].meal_mutex = &infos->meal_mutex;
 		infos->users[h].infos = infos;
 		infos->users[h].rip = &infos->rip_f;
-		h++;
 	}
 }
