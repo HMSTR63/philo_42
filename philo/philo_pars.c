@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:09:05 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 22:57:20 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/21 21:37:26 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	is_valid_input(char **v, t_info *infos)
 	{
 		infos->error_message = ERR_NOT_INT;
 		return (1);
-	}
+	} 
 	if (is_empty(v))
 	{
 		infos->error_message = ERR_EMPTY;
@@ -106,8 +106,7 @@ int	checker(t_info *infos, char **v)
 	infos->meals_to_eat = -1;
 	if (v[5])
 		infos->meals_to_eat = ascii_to_int(v[5]);
-	if (infos->user_count < 1 || infos->user_count > MAX_USER
-		|| infos->time_to_die < 1
+	if (infos->time_to_die < 1
 		|| infos->time_to_eat < 1 || infos->time_to_sleep < 1
 		|| (v[5] && infos->meals_to_eat <= 0))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:15:41 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/07 03:43:43 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/22 20:00:06 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_digit(char c)
 int	ascii_to_int(const char *str)
 {
 	long	res;
-	int		stor;
+	long		stor;
 	int		i;
 	int		sign;
 
@@ -55,7 +55,7 @@ int	ft_usleep(t_users *p, size_t ms)
 	{
 		if (ft_user_dead(p))
 			return (1);
-		usleep(400);
+		usleep(500);
 	}
 	return (0);
 }
@@ -72,10 +72,24 @@ size_t		get_time(void)
 void	ft_print_act(char *s, t_users *p, int p_id)
 {
 	size_t	rolex;
+	static int	f;
 
 	pthread_mutex_lock(p->print_mutex);
 	rolex = get_time() - p->infos->light_out;
-	if (!ft_user_dead(p))
+	if (!ft_user_dead(p) && f == 0)
 		printf("%zu %d %s\n", rolex, p_id, s);
+	if (ft_strcmp(s, "died") == 0)
+		f = 1;
 	pthread_mutex_unlock(p->print_mutex);
+}
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 || !s2)
+		return (0);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

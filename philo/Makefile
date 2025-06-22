@@ -4,7 +4,7 @@ SRC = philo_acts.c philo_pars.c philo_setup.c philo_start.c philo_utils.c philo_
 OBJ = $(SRC:.c=.o)
 #------------------------------ Compiler and Flags ------------------------------#
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3
 #------------------------------ Executable --------------------------------------#
 NAME = philo
 #------------------------------ Rules -------------------------------------------#

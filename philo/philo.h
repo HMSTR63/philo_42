@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 04:20:54 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 22:45:47 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/22 19:12:37 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+
 # include <unistd.h>
+# include <limits.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
@@ -47,9 +49,9 @@ typedef struct s_info
 {
 	int				error_message;
 	int				user_count;
-	size_t			time_to_die;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
 	int				meals_to_eat;
 	int				rip_f;
 	size_t			light_out;
@@ -81,4 +83,5 @@ int			ft_user_dead(t_users *p);
 int			is_white_space(char c);
 void		print_error(int error_code);
 void		print_usage(void);
+int			ft_strcmp(const char *s1, const char *s2);
 #endif

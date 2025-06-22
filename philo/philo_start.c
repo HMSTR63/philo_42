@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 04:38:02 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 21:17:41 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/22 19:00:32 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,29 @@ int	start_threads(t_info *infos)
 	pthread_t	monitor;
 
 	h = 0;
-	infos->light_out = get_time();
+	pthread_mutex_lock(&infos->print_mutex);
 
 	if (pthread_create(&monitor, NULL, &monitor_routine, &infos->users) != 0)
 		return (destroy_all(infos), 1);
 	while (h < infos->user_count)
 	{
 		if (pthread_create(&infos->users[h].user, NULL, &user_routine, &infos->users[h]) != 0)
+		{
+			pthread_mutex_lock(infos->users->dead_mutex);
+			infos->rip_f = 1;
+			pthread_mutex_unlock(infos->users->dead_mutex);
+			while (h > 0)
+			{
+				if (pthread_join(infos->users[h].user, NULL) != 0)
+					return (destroy_all(infos), 1);
+				h--;
+			}	
 			return (destroy_all(infos), 1);
+		}
 		h++;
 	}
+	infos->light_out = get_time();
+	pthread_mutex_unlock(&infos->print_mutex);
 	h = 0;
 	if (pthread_join(monitor, NULL) != 0)
 		return (destroy_all(infos), 1);
@@ -54,6 +67,8 @@ void	*user_routine(void *hmstr)
 	t_users	*p;
 
 	p = (t_users *)hmstr;
+	pthread_mutex_lock(&p->infos->print_mutex);
+	pthread_mutex_unlock(&p->infos->print_mutex);
 	if (p->infos->user_count == 1)
 	{
 		pthread_mutex_lock(p->r_fork);
@@ -65,7 +80,7 @@ void	*user_routine(void *hmstr)
 		return (hmstr);
 	}
 	if (p->id % 2 == 0)
-		usleep(500);
+		ft_usleep(p, p->infos->time_to_eat / 2);
 	while (!ft_user_dead(p))
 	{
 		ft_user_eat(p);
