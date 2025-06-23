@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 05:33:23 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/22 18:59:57 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/23 04:26:09 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,11 @@
 
 void	ft_user_eat(t_users *p)
 {
-	pthread_mutex_t *first_fork;
-	pthread_mutex_t *second_fork;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
 
-	// if (p->l_fork < p->r_fork)
-	// {
-		first_fork = p->l_fork;
-		second_fork = p->r_fork;
-	// }
-	// else
-	// {
-	// 	first_fork = p->r_fork;
-	// 	second_fork = p->l_fork;
-	// }
+	first_fork = p->l_fork;
+	second_fork = p->r_fork;
 	pthread_mutex_lock(first_fork);
 	ft_print_act("has taken a fork", p, p->id);
 	pthread_mutex_lock(second_fork);

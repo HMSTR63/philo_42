@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 06:10:03 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/06 21:43:05 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/23 05:58:06 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ int	is_white_space(char c)
 static int	user_dead(t_users *p, size_t time_to_die)
 {
 	size_t	current_time;
+	size_t	check_time;
 
 	pthread_mutex_lock(p->meal_mutex);
 	current_time = get_time();
-	if (current_time - p->last_meal > time_to_die)
+	check_time = current_time - p->last_meal;
+	if (check_time > time_to_die)
 	{
+		p->infos->check_tm = check_time;
 		pthread_mutex_unlock(p->meal_mutex);
 		return (1);
 	}
@@ -41,7 +44,7 @@ int	check_user_dead(t_users *p)
 	{
 		if (user_dead(&p->infos->users[h], p->infos->time_to_die))
 		{
-			ft_print_act("died", p, p->id);
+			ft_print_died("died", p, p->id);
 			pthread_mutex_lock(p->dead_mutex);
 			*p->rip = 1;
 			pthread_mutex_unlock(p->dead_mutex);

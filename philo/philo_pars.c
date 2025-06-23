@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:09:05 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/21 21:37:26 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/23 05:22:58 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ static int	is_valid_input(char **v, t_info *infos)
 int	checker(t_info *infos, char **v)
 {
 	if (is_valid_input(v, infos))
-		return (1); // message
-
+		return (1);
 	infos->user_count = ascii_to_int(v[1]);
 	infos->time_to_die = ascii_to_int(v[2]);
 	infos->time_to_eat = ascii_to_int(v[3]);

@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 04:20:54 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/22 19:12:37 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/23 05:54:41 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_info
 	int				meals_to_eat;
 	int				rip_f;
 	size_t			light_out;
+	size_t			check_tm;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	print_mutex;
@@ -62,7 +63,7 @@ typedef struct s_info
 	t_users			users[MAX_USER];
 }	t_info;
 
-
+void	ft_print_died(char *s, t_users *p, int p_id);
 void		setup_all(t_info *infos);
 int			start_threads(t_info *infos);
 int			checker(t_info *infos, char **v);

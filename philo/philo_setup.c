@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_setup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sojammal <sojammal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:56:16 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/07 03:23:11 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/23 05:46:27 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	setup_all(t_info *infos)
 	while (++h < infos->user_count)
 		pthread_mutex_init(&infos->forks[h], NULL);
 	infos->rip_f = 0;
+	infos->check_tm = 0;
 	pthread_mutex_init(&infos->print_mutex, NULL);
 	pthread_mutex_init(&infos->dead_mutex, NULL);
 	pthread_mutex_init(&infos->meal_mutex, NULL);
