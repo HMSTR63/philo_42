@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 06:10:03 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/23 05:58:06 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:44:56 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_white_space(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
 
 static int	user_dead(t_users *p, size_t time_to_die)
@@ -44,10 +45,10 @@ int	check_user_dead(t_users *p)
 	{
 		if (user_dead(&p->infos->users[h], p->infos->time_to_die))
 		{
-			ft_print_died("died", p, p->id);
 			pthread_mutex_lock(p->dead_mutex);
 			*p->rip = 1;
 			pthread_mutex_unlock(p->dead_mutex);
+			ft_print_act("died", p, p->id);
 			return (1);
 		}
 		h++;

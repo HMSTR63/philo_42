@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 02:23:49 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/21 21:52:13 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 01:41:27 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ void	print_usage(void)
 	write(1, "<time_to_eat> <time_to_sleep> [meals_required]\n", 47);
 	write(1, "\nArguments:\n", 12);
 	write(1, "  <num_philosophers>: Number of philosophers (1-200).\n", 54);
-	write(1, "  <time_to_die>: Time (ms) until a philosopher dies if not eating.\n", 67);
+	write(1, "  <time_to_die>: Time (ms) until ", 35);
+	write(1, "a philosopher dies if they don't eat.\n", 40);
 	write(1, "  <time_to_eat>: Time (ms) a philosopher spends eating.\n", 56);
-	write(1, "  <time_to_sleep>: Time (ms) a philosopher spends sleeping.\n", 60);
-	write(1, "  [meals_required]: Optional. Number of meals before simulation ends.\n", 69);
+	write(1, "  <time_to_sleep>: Time (ms) ", 31);
+	write(1, "a philosopher spends sleeping.\n", 32);
+	write(1, "  [meals_required]: Optional. ", 32);
+	write(1, "Number of meals each philosopher must eat.\n", 44);
 	write(1, "\nExample:\n", 10);
 	write(1, "  ./philo 4 800 200 200 3\n", 25);
-	write(1, "  Starts 4 philosophers: each has 800ms to live, 200ms to eat,\n", 63);
+	write(1, "  Starts 4 philosophers: ", 27);
+	write(1, "each philosopher has 800ms to die, ", 37);
 	write(1, "  200ms to sleep, and eats 3 meals in total.\n", 46);
 }
 

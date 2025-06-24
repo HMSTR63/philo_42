@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:15:41 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/23 05:56:29 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:28:00 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	is_digit(char c)
 int	ascii_to_int(const char *str)
 {
 	unsigned long long	res;
-	int		i;
-	int		sign;
+	int					i;
+	int					sign;
 
 	res = 0;
 	i = 0;
@@ -58,7 +58,7 @@ int	ft_usleep(t_users *p, size_t ms)
 	return (0);
 }
 
-size_t		get_time(void)
+size_t	get_time(void)
 {
 	struct timeval	tva;
 
@@ -69,38 +69,25 @@ size_t		get_time(void)
 
 void	ft_print_act(char *s, t_users *p, int p_id)
 {
-	size_t	rolex;
+	size_t		rolex;
 	static int	f;
 
 	pthread_mutex_lock(p->print_mutex);
-	rolex = get_time() - p->infos->light_out;
-	if (!ft_user_dead(p) && f == 0)
-		printf("%zu %d %s\n", rolex, p_id, s);
-	if (ft_strcmp(s, "died") == 0)
-		f = 1;
-	pthread_mutex_unlock(p->print_mutex);
-}
-
-void	ft_print_died(char *s, t_users *p, int p_id)
-{
-	static int	f;
-
-	pthread_mutex_lock(p->print_mutex);
-	if (!ft_user_dead(p) && f == 0)
-		printf("%zu %d %s\n", p->infos->check_tm, p_id, s);
-	if (ft_strcmp(s, "died") == 0)
-		f = 1;
-	pthread_mutex_unlock(p->print_mutex);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	if (!s1 || !s2)
-		return (0);
-	while (*s1 && *s2 && *s1 == *s2)
+	if (f == 0)
 	{
-		s1++;
-		s2++;
+		if (ft_strcmp(s, "died") == 0)
+		{
+			rolex = p->infos->check_tm;
+			f = 1;
+		}
+		else if (!ft_user_dead(p))
+			rolex = get_time() - p->infos->light_out;
+		else
+		{
+			pthread_mutex_unlock(p->print_mutex);
+			return ;
+		}
+		printf("%zu %d %s\n", rolex, p_id, s);
 	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	pthread_mutex_unlock(p->print_mutex);
 }

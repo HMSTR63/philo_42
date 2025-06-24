@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:09:05 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/23 05:22:58 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:42:30 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,17 @@ static int	is_valid_input(char **v, t_info *infos)
 	if (space_fund(v))
 	{
 		infos->error_message = ERR_SPACES;
-		return (1); // message
+		return (1);
 	}
 	if (is_int(v))
 	{
 		infos->error_message = ERR_NOT_INT;
 		return (1);
-	} 
+	}
 	if (is_empty(v))
 	{
 		infos->error_message = ERR_EMPTY;
-		return (1); // message
+		return (1);
 	}
 	return (0);
 }
@@ -105,7 +105,8 @@ int	checker(t_info *infos, char **v)
 	infos->meals_to_eat = -1;
 	if (v[5])
 		infos->meals_to_eat = ascii_to_int(v[5]);
-	if (infos->time_to_die < 1
+	if (infos->user_count < 1 || infos->time_to_die < 1
+		|| infos->user_count > MAX_USER
 		|| infos->time_to_eat < 1 || infos->time_to_sleep < 1
 		|| (v[5] && infos->meals_to_eat <= 0))
 	{

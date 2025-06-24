@@ -6,13 +6,12 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 04:20:54 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/23 05:54:41 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:27:31 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-
 
 # include <unistd.h>
 # include <limits.h>
@@ -49,9 +48,9 @@ typedef struct s_info
 {
 	int				error_message;
 	int				user_count;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				meals_to_eat;
 	int				rip_f;
 	size_t			light_out;
@@ -63,7 +62,7 @@ typedef struct s_info
 	t_users			users[MAX_USER];
 }	t_info;
 
-void	ft_print_died(char *s, t_users *p, int p_id);
+void		ft_print_died(char *s, t_users *p, int p_id);
 void		setup_all(t_info *infos);
 int			start_threads(t_info *infos);
 int			checker(t_info *infos, char **v);
@@ -85,4 +84,6 @@ int			is_white_space(char c);
 void		print_error(int error_code);
 void		print_usage(void);
 int			ft_strcmp(const char *s1, const char *s2);
+int			start_user_threads(t_info *infos);
+int			join_user_threads(t_info *infos);
 #endif

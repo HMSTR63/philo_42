@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 04:38:02 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/22 19:00:32 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:25:35 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,19 @@
 
 int	start_threads(t_info *infos)
 {
-	int			h;
 	pthread_t	monitor;
 
-	h = 0;
 	pthread_mutex_lock(&infos->print_mutex);
-
 	if (pthread_create(&monitor, NULL, &monitor_routine, &infos->users) != 0)
 		return (destroy_all(infos), 1);
-	while (h < infos->user_count)
-	{
-		if (pthread_create(&infos->users[h].user, NULL, &user_routine, &infos->users[h]) != 0)
-		{
-			pthread_mutex_lock(infos->users->dead_mutex);
-			infos->rip_f = 1;
-			pthread_mutex_unlock(infos->users->dead_mutex);
-			while (h > 0)
-			{
-				if (pthread_join(infos->users[h].user, NULL) != 0)
-					return (destroy_all(infos), 1);
-				h--;
-			}	
-			return (destroy_all(infos), 1);
-		}
-		h++;
-	}
+	if (start_user_threads(infos) != 0)
+		return (1);
 	infos->light_out = get_time();
 	pthread_mutex_unlock(&infos->print_mutex);
-	h = 0;
 	if (pthread_join(monitor, NULL) != 0)
 		return (destroy_all(infos), 1);
-	while (h < infos->user_count)
-	{
-		if (pthread_join(infos->users[h].user, NULL) != 0)
-			return (destroy_all(infos), 1);
-		h++;
-	}
+	if (join_user_threads(infos) != 0)
+		return (1);
 	return (0);
 }
 

@@ -1,5 +1,5 @@
 #------------------------------ Source Files ------------------------------------#
-SRC = philo_acts.c philo_pars.c philo_setup.c philo_start.c philo_utils.c philo_utils1.c philo.c
+SRC = philo_acts.c philo_pars.c philo_setup.c philo_start.c philo_utils.c philo_utils1.c philo_utils2.c  philo.c
 #------------------------------ Object Files ------------------------------------#
 OBJ = $(SRC:.c=.o)
 #------------------------------ Compiler and Flags ------------------------------#
