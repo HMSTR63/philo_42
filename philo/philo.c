@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 02:23:49 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/24 01:41:27 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/24 23:28:29 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ void	print_error(int error_code)
 void	print_usage(void)
 {
 	write(1, "Usage: ./philo <num_philosophers> <time_to_die> ", 49);
-	write(1, "<time_to_eat> <time_to_sleep> [meals_required]\n", 47);
-	write(1, "\nArguments:\n", 12);
-	write(1, "  <num_philosophers>: Number of philosophers (1-200).\n", 54);
-	write(1, "  <time_to_die>: Time (ms) until ", 35);
-	write(1, "a philosopher dies if they don't eat.\n", 40);
-	write(1, "  <time_to_eat>: Time (ms) a philosopher spends eating.\n", 56);
-	write(1, "  <time_to_sleep>: Time (ms) ", 31);
+	write(1, "<time_to_eat> <time_to_sleep> [meals_required]\n", 48);
+	write(1, "\nArguments:\n", 13);
+	write(1, "  <num_philosophers>: Number of philosophers (1-200).\n", 55);
+	write(1, "  <time_to_die>: Time (ms) until ", 34);
+	write(1, "a philosopher dies if they don't eat.\n", 39);
+	write(1, "  <time_to_eat>: Time (ms) a philosopher spends eating.\n", 57);
+	write(1, "  <time_to_sleep>: Time (ms) ", 30);
 	write(1, "a philosopher spends sleeping.\n", 32);
-	write(1, "  [meals_required]: Optional. ", 32);
+	write(1, "  [meals_required]: Optional. ", 31);
 	write(1, "Number of meals each philosopher must eat.\n", 44);
-	write(1, "\nExample:\n", 10);
-	write(1, "  ./philo 4 800 200 200 3\n", 25);
-	write(1, "  Starts 4 philosophers: ", 27);
-	write(1, "each philosopher has 800ms to die, ", 37);
+	write(1, "\nExample:\n", 11);
+	write(1, "  ./philo 4 800 200 200 3\n", 27);
+	write(1, "  Starts 4 philosophers: ", 26);
+	write(1, "each philosopher has 800ms to die, ", 36);
 	write(1, "  200ms to sleep, and eats 3 meals in total.\n", 46);
 }
 
