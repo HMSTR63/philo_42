@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 03:15:41 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/24 18:28:00 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:57:32 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,14 @@ void	ft_print_act(char *s, t_users *p, int p_id)
 	static int	f;
 
 	pthread_mutex_lock(p->print_mutex);
-	if (f == 0)
+	if (f && ft_strcmp(s, "died") != 0)
 	{
-		if (ft_strcmp(s, "died") == 0)
-		{
-			rolex = p->infos->check_tm;
-			f = 1;
-		}
-		else if (!ft_user_dead(p))
-			rolex = get_time() - p->infos->light_out;
-		else
-		{
-			pthread_mutex_unlock(p->print_mutex);
-			return ;
-		}
-		printf("%zu %d %s\n", rolex, p_id, s);
+		pthread_mutex_unlock(p->print_mutex);
+		return ;
 	}
+	if (ft_strcmp(s, "died") == 0)
+		f = 1;
+	rolex = get_time() - p->infos->light_out;
+	printf("%zu %d %s\n", rolex, p_id, s);
 	pthread_mutex_unlock(p->print_mutex);
 }

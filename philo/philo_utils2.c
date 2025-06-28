@@ -6,17 +6,18 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:26:11 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/24 18:28:05 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:42:52 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	start_user_threads(t_info *infos)
+int	start_user_threads(t_info *infos, int *created)
 {
 	int	h;
 
 	h = 0;
+	*created = 0;
 	while (h < infos->user_count)
 	{
 		if (pthread_create(&infos->users[h].user, NULL,
@@ -25,28 +26,24 @@ int	start_user_threads(t_info *infos)
 			pthread_mutex_lock(infos->users->dead_mutex);
 			infos->rip_f = 1;
 			pthread_mutex_unlock(infos->users->dead_mutex);
-			while (h > 0)
-			{
-				if (pthread_join(infos->users[h].user, NULL) != 0)
-					return (destroy_all(infos), 1);
-				h--;
-			}
-			return (destroy_all(infos), 1);
+			while (--h >= 0)
+				pthread_join(infos->users[h].user, NULL);
+			return (1);
 		}
 		h++;
+		(*created)++;
 	}
 	return (0);
 }
 
-int	join_user_threads(t_info *infos)
+int	join_user_threads(t_info *infos, int created)
 {
 	int	h;
 
 	h = 0;
-	while (h < infos->user_count)
+	while (h < created)
 	{
-		if (pthread_join(infos->users[h].user, NULL) != 0)
-			return (destroy_all(infos), 1);
+		pthread_join(infos->users[h].user, NULL);
 		h++;
 	}
 	return (0);
@@ -62,4 +59,18 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}
+
+int	user_done_eating(t_users *p)
+{
+	if (p->infos->meals_to_eat == -1)
+		return (0);
+	pthread_mutex_lock(p->meal_mutex);
+	if (p->meals_eaten >= p->infos->meals_to_eat)
+	{
+		pthread_mutex_unlock(p->meal_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(p->meal_mutex);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 02:23:49 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/24 23:28:29 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/26 23:19:45 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	main(int c, char **v)
 		return (1);
 	}
 	setup_all(&infos);
-	start_threads(&infos);
+	if (start_threads(&infos) != 0)
+		return (destroy_all(&infos), 1);
 	destroy_all(&infos);
 	return (0);
 }

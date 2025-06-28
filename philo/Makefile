@@ -1,13 +1,9 @@
-#------------------------------ Source Files ------------------------------------#
 SRC = philo_acts.c philo_pars.c philo_setup.c philo_start.c philo_utils.c philo_utils1.c philo_utils2.c  philo.c
-#------------------------------ Object Files ------------------------------------#
 OBJ = $(SRC:.c=.o)
-#------------------------------ Compiler and Flags ------------------------------#
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
-#------------------------------ Executable --------------------------------------#
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 NAME = philo
-#------------------------------ Rules -------------------------------------------#
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -19,7 +15,6 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[1;34m🔹 Compiling: $< -> $@\033[0m"
 
-#------------------------------ Cleaning ----------------------------------------#
 clean:
 	@echo "\033[0;33m🧼 Removing compiled object files to clean up...\033[0m"
 	@rm -f $(OBJ)

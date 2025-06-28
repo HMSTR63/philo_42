@@ -6,7 +6,7 @@
 /*   By: sojammal <sojammal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 04:20:54 by sojammal          #+#    #+#             */
-/*   Updated: 2025/06/24 18:27:31 by sojammal         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:30:02 by sojammal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_users
 	int				id;
 	int				eat;
 	int				meals_eaten;
-	int				*rip;
 	size_t			last_meal;
 	pthread_t		user;
 	pthread_mutex_t	*l_fork;
@@ -54,7 +53,6 @@ typedef struct s_info
 	int				meals_to_eat;
 	int				rip_f;
 	size_t			light_out;
-	size_t			check_tm;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	print_mutex;
@@ -84,6 +82,7 @@ int			is_white_space(char c);
 void		print_error(int error_code);
 void		print_usage(void);
 int			ft_strcmp(const char *s1, const char *s2);
-int			start_user_threads(t_info *infos);
-int			join_user_threads(t_info *infos);
+int			start_user_threads(t_info *infos, int *created);
+int			join_user_threads(t_info *infos, int created);
+int			user_done_eating(t_users *p);
 #endif
